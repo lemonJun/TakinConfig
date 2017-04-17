@@ -5,10 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bj58.wf.mvc.BeatContext.Model;
-import com.bj58.wf.mvc.annotation.Path;
+import com.takin.mvc.mvc.Model;
+import com.takin.mvc.mvc.annotation.Path;
 import com.xxl.conf.controllers.annotation.PermessionLimit;
 import com.xxl.conf.util.ReturnT;
 
@@ -52,15 +51,14 @@ public class IndexController extends SMBaseController {
     //    }
 
     @Path("/logout")
-    public ReturnT<String> logout(HttpServletRequest request, HttpServletResponse response) {
+    public ReturnT<String> logout() {
         //        if (PermissionInterceptor.ifLogin(request)) {
         //            PermissionInterceptor.logout(request, response);
         //        }
         return ReturnT.SUCCESS;
     }
 
-    @RequestMapping("/help")
-    @PermessionLimit
+    @Path("/help")
     public String help() {
         return "help";
     }

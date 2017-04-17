@@ -2,8 +2,8 @@ package com.xxl.conf.controllers;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.bj58.wf.mvc.ActionResult;
-import com.bj58.wf.mvc.BeatContext;
+import com.takin.mvc.mvc.ActionResult;
+import com.takin.mvc.mvc.BeatContext;
 
 public class JsonpActionResult extends ActionResult {
     private String content;

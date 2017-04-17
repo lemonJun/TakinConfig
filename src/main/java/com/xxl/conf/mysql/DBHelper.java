@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 
 import com.bj58.sfft.utility.dao.basedao.DAOBase;
 import com.bj58.sfft.utility.dao.basedao.DAOHelper;
-import com.bj58.wf.core.WF;
 import com.google.inject.Singleton;
+import com.takin.mvc.mvc.WF;
 
 /**
  * 这个类应该是给调用方使用的 不应该包含在这个客户端中

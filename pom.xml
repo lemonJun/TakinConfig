@@ -36,70 +36,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.bj58.wf</groupId>
-			<artifactId>com.bj58.wf.mvc</artifactId>
-			<version>1.0.6-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-webmvc</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.bj58.zhaopin</groupId>
-			<artifactId>com.bj58.zhaopin.app.engine</artifactId>
-			<version>0.4-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-lang</artifactId>
-					<groupId>apache-lang</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>commons-collections</artifactId>
-					<groupId>apache-collections</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>com.bj58.zhaopin.supports</artifactId>
-					<groupId>com.bj58.zhaopin</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>org.springframework</artifactId>
-					<groupId>spring-core</groupId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.bj58.spat</groupId>
-					<artifactId>
-						com.bj58.spat.memcachedclient
-					</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>com.bj58.spat</groupId>
-			<artifactId>com.bj58.spat.utility</artifactId>
-			<version>3.6.0-SNAPSHOT</version>
+			<groupId>com.takin</groupId>
+			<artifactId>takinmvc</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<!-- java mail end -->
 		<dependency>

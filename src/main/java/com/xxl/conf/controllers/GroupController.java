@@ -3,11 +3,9 @@ package com.xxl.conf.controllers;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bj58.wf.mvc.BeatContext.Model;
-import com.bj58.wf.mvc.annotation.Path;
+import com.takin.mvc.mvc.Model;
+import com.takin.mvc.mvc.annotation.Path;
 import com.xxl.conf.mysql.XxlConfGroup;
 import com.xxl.conf.mysql.XxlConfGroupDaoImpl;
 import com.xxl.conf.mysql.XxlConfNodeDaoImpl;
@@ -24,17 +22,16 @@ public class GroupController extends SMBaseController {
     private XxlConfGroupDaoImpl xxlConfGroupDao = GuiceDI.getInstance(XxlConfGroupDaoImpl.class);
     private XxlConfNodeDaoImpl xxlConfNodeDao = GuiceDI.getInstance(XxlConfNodeDaoImpl.class);
 
-    @RequestMapping
+    @Path("/index")
     public String index(Model model) {
 
         List<XxlConfGroup> list = xxlConfGroupDao.findAll();
 
-        model.addAttribute("list", list);
+        model.add("list", list);
         return "group/group.index";
     }
 
-    @RequestMapping("/save")
-    @ResponseBody
+    @Path("/save")
     public ReturnT<String> save(XxlConfGroup xxlConfGroup) {
 
         // valid
@@ -58,8 +55,7 @@ public class GroupController extends SMBaseController {
         return (ret > 0) ? ReturnT.SUCCESS : ReturnT.FAIL;
     }
 
-    @RequestMapping("/update")
-    @ResponseBody
+    @Path("/update")
     public ReturnT<String> update(XxlConfGroup xxlConfGroup) {
 
         // valid
@@ -77,8 +73,7 @@ public class GroupController extends SMBaseController {
         return (ret > 0) ? ReturnT.SUCCESS : ReturnT.FAIL;
     }
 
-    @RequestMapping("/remove")
-    @ResponseBody
+    @Path("/remove")
     public ReturnT<String> remove(String groupName) {
 
         // valid

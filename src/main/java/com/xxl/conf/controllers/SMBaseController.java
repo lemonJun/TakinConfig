@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.bj58.spat.scf.client.SCFInit;
-import com.bj58.wf.core.WF;
-import com.bj58.wf.mvc.BeatContext.Model;
-import com.bj58.wf.mvc.MvcController;
+import com.takin.mvc.mvc.AbstractController;
+import com.takin.mvc.mvc.Model;
+import com.takin.mvc.mvc.WF;
 import com.xxl.conf.util.GuiceDI;
 
-public class SMBaseController extends MvcController {
+public class SMBaseController extends AbstractController {
     private static final Logger logger = Logger.getLogger(SMBaseController.class);
 
     static {

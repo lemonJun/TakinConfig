@@ -3,13 +3,8 @@ package com.xxl.conf.controllers;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.bj58.wf.mvc.BeatContext.Model;
-import com.bj58.wf.mvc.annotation.Path;
-import com.xxl.conf.controllers.annotation.PermessionLimit;
+import com.takin.mvc.mvc.Model;
+import com.takin.mvc.mvc.annotation.Path;
 import com.xxl.conf.mysql.XxlConfGroup;
 import com.xxl.conf.mysql.XxlConfGroupDaoImpl;
 import com.xxl.conf.mysql.XxlConfNode;
@@ -31,12 +26,16 @@ public class ConfController extends SMBaseController {
     public String index(Model model, String znodeKey) {
 
         List<XxlConfGroup> list = xxlConfGroupDao.findAll();
-        model.addAttribute("XxlConfNodeGroup", list);
+        model.add("XxlConfNodeGroup", list);
         return "conf/conf.index";
     }
 
     @Path("/pageList")
-    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int start, @RequestParam(required = false, defaultValue = "10") int length, String nodeGroup, String nodeKey) {
+    public Map<String, Object> pageList() {
+        int start = 1;
+        int length = 10;
+        String nodeGroup = "";
+        String nodeKey = "";
         return xxlConfNodeService.pageList(start, length, nodeGroup, nodeKey);
     }
 
