@@ -32,7 +32,7 @@ public class GroupController extends SMBaseController {
             List<ConfGroup> list = GuiceDI.getInstance(ConfGroupDao.class).findAll();
             beat.getModel().add("list", list);
             for (ConfGroup group : list) {
-                logger.info("group:" + group.getGroupName() + " titel:" + group.getGroupTitle());
+                logger.info("group:" + group.getGroupname() + " titel:" + group.getGrouptitle());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,20 +47,20 @@ public class GroupController extends SMBaseController {
         ConfGroup xxlConfGroup = new ConfGroup();
 
         // valid
-        if (xxlConfGroup.getGroupName() == null || StringUtils.isBlank(xxlConfGroup.getGroupName())) {
+        if (xxlConfGroup.getGroupname() == null || StringUtils.isBlank(xxlConfGroup.getGroupname())) {
             json = JsonMsgResult.buildResult(500, "请输入GroupName");
         }
-        if (xxlConfGroup.getGroupName().length() < 4 || xxlConfGroup.getGroupName().length() > 100) {
+        if (xxlConfGroup.getGroupname().length() < 4 || xxlConfGroup.getGroupname().length() > 100) {
             json = JsonMsgResult.buildResult(500, "GroupName长度限制为4~100");
 
         }
-        if (xxlConfGroup.getGroupTitle() == null || StringUtils.isBlank(xxlConfGroup.getGroupTitle())) {
+        if (xxlConfGroup.getGrouptitle() == null || StringUtils.isBlank(xxlConfGroup.getGrouptitle())) {
             json = JsonMsgResult.buildResult(500, "请输入分组名称");
 
         }
 
         // valid repeat
-        ConfGroup groupOld = GuiceDI.getInstance(ConfGroupDao.class).load(xxlConfGroup.getGroupName());
+        ConfGroup groupOld = GuiceDI.getInstance(ConfGroupDao.class).load(xxlConfGroup.getGroupname());
         if (groupOld != null) {
             json = JsonMsgResult.buildResult(500, "GroupName对应分组以存在,请勿重复添加");
         }
@@ -74,14 +74,14 @@ public class GroupController extends SMBaseController {
         JSONObject json = new JSONObject();
         ConfGroup xxlConfGroup = new ConfGroup();
         // valid
-        if (xxlConfGroup.getGroupName() == null || StringUtils.isBlank(xxlConfGroup.getGroupName())) {
+        if (xxlConfGroup.getGroupname() == null || StringUtils.isBlank(xxlConfGroup.getGroupname())) {
             json = JsonMsgResult.buildResult(500, "请输入GroupName");
 
         }
-        if (xxlConfGroup.getGroupName().length() < 4 || xxlConfGroup.getGroupName().length() > 100) {
+        if (xxlConfGroup.getGroupname().length() < 4 || xxlConfGroup.getGroupname().length() > 100) {
             json = JsonMsgResult.buildResult(500, "GroupName长度限制为4~100");
         }
-        if (xxlConfGroup.getGroupTitle() == null || StringUtils.isBlank(xxlConfGroup.getGroupTitle())) {
+        if (xxlConfGroup.getGrouptitle() == null || StringUtils.isBlank(xxlConfGroup.getGrouptitle())) {
             json = JsonMsgResult.buildResult(500, "请输入分组名称");
         }
         int ret = GuiceDI.getInstance(ConfGroupDao.class).update(xxlConfGroup);

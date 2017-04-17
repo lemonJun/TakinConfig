@@ -5,22 +5,23 @@ import com.bj58.sfft.utility.dao.annotation.Table;
 @Table(name = "XXL_CONF_GROUP")
 public class ConfGroup {
 
-    private String groupName;
-    private String groupTitle;
+    private String groupname;
+    private String grouptitle;
 
-    public String getGroupName() {
-        return groupName;
+    public String getGroupname() {
+        return groupname;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
     }
 
-    public String getGroupTitle() {
-        return groupTitle;
+    public String getGrouptitle() {
+        return grouptitle;
     }
 
-    public void setGroupTitle(String groupTitle) {
-        this.groupTitle = groupTitle;
+    public void setGrouptitle(String grouptitle) {
+        this.grouptitle = grouptitle;
     }
+
 }

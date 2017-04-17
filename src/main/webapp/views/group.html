@@ -47,11 +47,11 @@
                                 <tbody>
 									#foreach($!item in $!list)								
 									<tr>
-                                        <td>$!item.groupName</td>
-                                        <td>$!item.groupTitle</td>
+                                        <td>$!item.groupname</td>
+                                        <td>$!item.grouptitle</td>
 										<td>
-                                            <button class="btn btn-warning btn-xs update" groupName="$!item.groupName" groupTitle="$!item.groupTitle" >编辑</button>
-                                            <button class="btn btn-danger btn-xs remove" groupName="$!item.groupTitle" >删除</button>
+                                            <button class="btn btn-warning btn-xs update" groupName="$!item.groupname" groupTitle="$!item.grouptitle" >编辑</button>
+                                            <button class="btn btn-danger btn-xs remove" groupName="$!item.grouptitle" >删除</button>
 										</td>
 									</tr>
 									#end

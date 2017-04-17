@@ -21,7 +21,7 @@ public class ConfGroupDao {
             String sql = "select * from XXL_CONF_GROUP ";
             List<ConfGroup> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfGroup.class, sql);
             for (ConfGroup group : list) {
-                logger.info("group:" + group.getGroupName() + " titel:" + group.getGroupTitle());
+                logger.info("group:" + group.getGroupname() + " titel:" + group.getGrouptitle());
             }
 
             return list;
