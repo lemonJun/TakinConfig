@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>企业后台管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="/components/font-awesome/css/font-awesome.min.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="/assets/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+		<link rel="stylesheet" href="/assets/css/ace-skins.css" />
+		<link rel="stylesheet" href="/assets/css/ace-rtl.css" />
+		
+		<!-- 自定义样式 -->
+		<link rel="stylesheet" href="/css/main.css" />
+
+		<!-- ace settings handler -->
+		<script src="/assets/js/ace-extra.js"></script>
+
+	</head>
+
+	<body class="no-skin">
+		<!-- #section:basics/navbar.layout -->
+		<div id="navbar" class="navbar navbar-default ace-save-state">
+			<div class="navbar-container ace-save-state" id="navbar-container">
+				<!-- #section:basics/sidebar.mobile.toggle -->
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<!-- /section:basics/sidebar.mobile.toggle -->
+				<div class="navbar-header pull-left">
+					<!-- #section:basics/navbar.layout.brand -->
+					<a href="#" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							企业后台管理系统
+						</small>
+					</a>
+				</div>
+
+				<!-- #section:basics/navbar.dropdown -->
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+						<!-- #section:basics/navbar.user_menu -->
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" src="/assets/avatars/user.jpg" alt="Jason's Photo" />
+								<span class="user-info">
+									<small>Welcome,</small>
+								        中华英才
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a href="#">
+										<i class="ace-icon fa fa-cog"></i>
+										设置
+									</a>
+								</li>
+
+								<li>
+									<a href="#page/profile">
+										<i class="ace-icon fa fa-user"></i>
+										描述
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="#">
+										<i class="ace-icon fa fa-power-off"></i>
+										退出
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<!-- /section:basics/navbar.user_menu -->
+					</ul>
+				</div>
+
+				<!-- /section:basics/navbar.dropdown -->
+			</div><!-- /.navbar-container -->
+		</div>
+
+		<!-- /section:basics/navbar.layout -->
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div id="sidebar" class="sidebar responsive ace-save-state">
+				<!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="">
+						<a href="javascript:;" class="group">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 首页 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-pencil-square-o"></i>
+							<span class="menu-text"> 配置管理 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a data-url="page/form-elements" href="#page/form-elements" class="group">
+									<i class="menu-icon fa fa-caret-right"></i>
+									组管理
+								</a>
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a data-url="page/form-elements-2" href="#page/form-elements-2" class="conf">
+									<i class="menu-icon fa fa-caret-right"></i>
+									配置管理
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-desktop"></i>
+							<span class="menu-text">
+								数据统计
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="javascript:;" class="jobChr">
+									<i class="menu-icon fa fa-caret-right"></i>
+									英才发布职位
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a data-url="page/elements" href="javascript:;" class="jobQD">
+									<i class="menu-icon fa fa-caret-right"></i>
+									巧达导入职位
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a data-url="page/tables" href="#page/tables">
+									<i class="menu-icon fa fa-caret-right"></i>
+								       简历搜索统计
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a data-url="page/jqgrid" href="#page/jqgrid">
+									<i class="menu-icon fa fa-caret-right"></i>
+									简历关系统计
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a data-url="page/jqgrid" href="#page/jqgrid">
+									<i class="menu-icon fa fa-caret-right"></i>
+									用户访问统计
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-desktop"></i>
+							<span class="menu-text">
+								数据查询
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+
+							<li class="cvsou">
+								<a href="javascript:;">
+									<i class="menu-icon fa fa-caret-right"></i>
+									简历搜索
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a data-url="page/jqgrid" href="#page/jqgrid">
+									<i class="menu-icon fa fa-caret-right"></i>
+									职位搜索
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a data-url="page/jqgrid" href="#page/jqgrid">
+									<i class="menu-icon fa fa-caret-right"></i>
+									简历查询
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
+
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> 网络抓取 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a data-url="page/tables" href="#page/tables">
+									<i class="menu-icon fa fa-caret-right"></i>
+								       智联
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a data-url="page/jqgrid" href="#page/jqgrid">
+									<i class="menu-icon fa fa-caret-right"></i>
+									51JOB
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a data-url="page/jqgrid" href="#page/jqgrid">
+									<i class="menu-icon fa fa-caret-right"></i>
+								       拉勾
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a data-url="page/jqgrid" href="#page/jqgrid">
+									<i class="menu-icon fa fa-caret-right"></i>
+								       BOSS直聘
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-pencil-square-o"></i>
+							<span class="menu-text"> 敏感词 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a data-url="page/form-elements" href="#page/form-elements">
+									<i class="menu-icon fa fa-caret-right"></i>
+									敏感词库
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a data-url="page/form-elements-2" href="#page/form-elements-2">
+									<i class="menu-icon fa fa-caret-right"></i>
+									校验
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					
+				</ul><!-- /.nav-list -->
+
+				<!-- #section:basics/sidebar.layout.minimize -->
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+
+				<!-- /section:basics/sidebar.layout.minimize -->
+			</div>
+
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					
+					</div>
+
+				
+		<!-- basic scripts -->
+		<script src="/components/jquery/dist/jquery.min.js"></script>
+
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='/components/_mod/jquery.mobile.custom/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<!-- ace scripts -->
+		<script src="/assets/js/src/elements.scroller.js"></script>
+		<script src="/assets/js/src/elements.colorpicker.js"></script>
+		<script src="/assets/js/src/elements.fileinput.js"></script>
+		<script src="/assets/js/src/elements.typeahead.js"></script>
+		<script src="/assets/js/src/elements.wysiwyg.js"></script>
+		<script src="/assets/js/src/elements.spinner.js"></script>
+		<script src="/assets/js/src/elements.treeview.js"></script>
+		<script src="/assets/js/src/elements.wizard.js"></script>
+		<script src="/assets/js/src/elements.aside.js"></script>
+		<script src="/assets/js/src/ace.js"></script>
+		<script src="/assets/js/src/ace.basics.js"></script>
+		<script src="/assets/js/src/ace.scrolltop.js"></script>
+		<script src="/assets/js/src/ace.ajax-content.js"></script>
+		<script src="/assets/js/src/ace.touch-drag.js"></script>
+		<script src="/assets/js/src/ace.sidebar.js"></script>
+		<script src="/assets/js/src/ace.sidebar-scroll-1.js"></script>
+		<script src="/assets/js/src/ace.submenu-hover.js"></script>
+		<script src="/assets/js/src/ace.widget-box.js"></script>
+		<script src="/assets/js/src/ace.settings.js"></script>
+		<script src="/assets/js/src/ace.settings-rtl.js"></script>
+		<script src="/assets/js/src/ace.settings-skin.js"></script>
+		<script src="/assets/js/src/ace.widget-on-reload.js"></script>
+		<script src="/assets/js/src/ace.searchbox-autocomplete.js"></script>
+
+
+						<!-- /section:settings.box -->
+						<div class="page-content-area">
+							<!-- ajax content goes here -->
+							<iframe src="" frameborder="none" width="100%" height="100%" marginheight="0" marginwidth="0" allowTransparency="true" id="myFrame"></iframe>
+
+							<script type="text/javascript" src="/js/main.js"></script>
+
+						</div><!-- /.page-content-area -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+			<!-- <div class="footer">
+				<div class="footer-inner">
+					<div class="footer-content">
+						<span class="bigger-120">
+							<span class="blue bolder">中华英才网</span>
+							后台管理系统 &copy; 2016
+						</span>
+					</div>
+				</div>
+			</div> -->
+			<!-- 返回顶部 -->
+			<!-- <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a> -->
+		</div><!-- /.main-container -->
+
+
+	</body>
+</html>

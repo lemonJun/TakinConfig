@@ -1,0 +1,27 @@
+body{font:14px/30px 'Microsoft YaHei',微软雅黑,Helvetica,Tahoma; background: #fff;}
+.page-content{ padding:20px 0 0 20px;}
+.line{width:100%; height:1px; border-bottom: 1px dashed #ccc; margin-top: 30px;}
+body.mainBg{ background: #fff; padding-right: 20px;}
+
+
+.table-body{ position: relative;}
+
+.dataTables_wrapper .row:first-child{ padding:0;}
+
+.table-select{ float:left; margin-right: 20px; margin-left: 12px;}
+.dataTables_filter{ float:left; margin-right: 10px;}
+#btn-table{ padding:1px 10px; margin-top: 1px;}
+
+.select-newAdd{ width:60%; float:left; margin: 10px auto;}
+.select-newAdd .form-control{ display: inline-block;}
+select.input-sm{ display: inline-block; padding:0; width: 130px;}
+
+.clearfix{ margin-top: 10px;}
+
+/*page*/
+.pageList{ width:200px; text-align: center; position: absolute; left:50%; bottom:10px; margin-left: -100px;}
+.pageList input{display: inline-block; padding:0 11px; line-height: 30px; border:1px solid #d9d9d9; border-left:none; background: #F9F9F9; color:#1c6ca2;}
+.pageList input:first-child{ border-left:1px solid #d9d9d9;}
+.pageList span{display: inline-block; background: #6FAED9;padding:0 11px; line-height: 30px; border:1px solid #6FAED9; border-left:none;color:#fff;}
+.pageList input:hover{text-decoration: none; background: #eaeff2; color:#1c6ca2;}
+.pageList input.disabled{ color:#777;}

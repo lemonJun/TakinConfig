@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>分布式配置管理平台</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-transform">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>分布式配置管理平台</title>
 
-<#import "/common/common.macro.ftl" as netCommon>
-<@netCommon.commonStyle />
-<link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/adminlte/plugins/datatables/dataTables.bootstrap.css">
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && "off" == cookieMap["adminlte_settings"].value >sidebar-collapse</#if> ">
+<body class="hold-transition skin-blue sidebar-mini ">
+#parse("/views/common.html")
 	<div class="wrapper">
 		
-		<@netCommon.commonHeader />
-
-		<@netCommon.commonLeft />
-
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
@@ -100,9 +98,7 @@
 			
 		</div>
 		<!-- /.content-wrapper -->
-
-		<@netCommon.commonFooter />
-
+		
 	</div>
 	<!-- ./wrapper -->
 	
@@ -190,14 +186,10 @@
 		</div>
 	</div>
 
-	<script>
-		var base_url = '${request.contextPath}';
-	</script>
-	<@netCommon.commonScript/>
-    <script src="${request.contextPath}/static/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="${request.contextPath}/static/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <script src="${request.contextPath}/static/plugins/jquery/jquery.validate.min.js"></script>
-    <script src="${request.contextPath}/static/js/conf.1.js"></script>
+    <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="/plugins/jquery/jquery.validate.min.js"></script>
+    <script src="/js/conf.1.js"></script>
 	
 </body>
 </html>

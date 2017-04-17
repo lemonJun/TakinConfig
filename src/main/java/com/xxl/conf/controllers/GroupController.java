@@ -26,7 +26,7 @@ public class GroupController extends SMBaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 
-    @Path("/index")
+    @Path("")
     public ActionResult index() {
         try {
             List<ConfGroup> list = GuiceDI.getInstance(ConfGroupDao.class).findAll();
