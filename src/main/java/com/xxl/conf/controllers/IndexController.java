@@ -1,36 +1,37 @@
 package com.xxl.conf.controllers;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.Model;
+import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
-import com.xxl.conf.controllers.annotation.PermessionLimit;
 import com.xxl.conf.util.ReturnT;
 
 /**
  * Created by xuxueli on 16/7/30.
  */
+@Controller
 public class IndexController extends SMBaseController {
     private static Logger logger = LoggerFactory.getLogger(IndexController.class.getName());
 
     @Path("/")
-    public String index(Model model, HttpServletRequest request) {
+    public ActionResult index(Model model, HttpServletRequest request) {
         //        if (!PermissionInterceptor.ifLogin(request)) {
         //            return "redirect:/toLogin";
         //        }
-        return "redirect:/conf";
+        return ActionResult.view("redirect:/conf");
     }
 
     @Path("/toLogin")
-    public String toLogin(Model model, HttpServletRequest request) {
+    public ActionResult toLogin(Model model, HttpServletRequest request) {
         //        if (PermissionInterceptor.ifLogin(request)) {
         //            return "redirect:/";
         //        }
-        return "login";
+        return ActionResult.view("login");
     }
 
     //    @Path("/login")
@@ -59,8 +60,8 @@ public class IndexController extends SMBaseController {
     }
 
     @Path("/help")
-    public String help() {
-        return "help";
+    public ActionResult help() {
+        return ActionResult.view("help");
     }
 
 }
