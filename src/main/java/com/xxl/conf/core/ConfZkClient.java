@@ -41,8 +41,8 @@ import java.util.concurrent.locks.ReentrantLock;
  *         集中式配置管理 动态更新
  *
  */
-public class XxlConfZkClient implements Watcher {
-    private static Logger logger = LoggerFactory.getLogger(XxlConfZkClient.class);
+public class ConfZkClient implements Watcher {
+    private static Logger logger = LoggerFactory.getLogger(ConfZkClient.class);
 
     // ------------------------------ zookeeper client ------------------------------
     private static ZooKeeper zooKeeper;
@@ -72,10 +72,10 @@ public class XxlConfZkClient implements Watcher {
                                         // add One-time trigger
                                         zooKeeper.exists(path, true);
                                         if (watchedEvent.getType() == Event.EventType.NodeDeleted) {
-                                            XxlConfClient.remove(key);
+                                            ConfClient.remove(key);
                                         } else if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {
                                             String data = getPathDataByKey(key);
-                                            XxlConfClient.update(key, data);
+                                            ConfClient.update(key, data);
                                         }
                                     }
                                 } catch (KeeperException e) {
@@ -85,7 +85,7 @@ public class XxlConfZkClient implements Watcher {
                                 }
                             }
                         });
-                        XxlConfZkClient.createWithParent(Environment.CONF_DATA_PATH); // init cfg root path
+                        ConfZkClient.createWithParent(Environment.CONF_DATA_PATH); // init cfg root path
                     } finally {
                         INSTANCE_INIT_LOCK.unlock();
                     }

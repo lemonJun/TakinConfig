@@ -3,15 +3,17 @@ package com.xxl.conf.controllers;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
 import com.takin.mvc.util.ParamUtil;
-import com.xxl.conf.mysql.XxlConfGroup;
-import com.xxl.conf.mysql.XxlConfGroupDaoImpl;
-import com.xxl.conf.mysql.XxlConfNodeDaoImpl;
+import com.xxl.conf.mysql.ConfGroup;
+import com.xxl.conf.mysql.ConfGroupDao;
+import com.xxl.conf.mysql.ConfNodeDao;
 import com.xxl.conf.util.GuiceDI;
 
 /**
@@ -22,21 +24,27 @@ import com.xxl.conf.util.GuiceDI;
 @Controller
 public class GroupController extends SMBaseController {
 
-    private XxlConfGroupDaoImpl xxlConfGroupDao = GuiceDI.getInstance(XxlConfGroupDaoImpl.class);
-    private XxlConfNodeDaoImpl xxlConfNodeDao = GuiceDI.getInstance(XxlConfNodeDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 
     @Path("/index")
     public ActionResult index() {
-        List<XxlConfGroup> list = xxlConfGroupDao.findAll();
-        beat.getModel().add("list", list);
-        return ActionResult.view("group");
+        try {
+            List<ConfGroup> list = GuiceDI.getInstance(ConfGroupDao.class).findAll();
+            beat.getModel().add("list", list);
+            for (ConfGroup group : list) {
+                logger.info("group:" + group.getGroupName() + " titel:" + group.getGroupTitle());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ActionResult.view("views/group");
     }
 
     @Path("/save")
     public ActionResult save() {
         JSONObject json = new JSONObject();
 
-        XxlConfGroup xxlConfGroup = new XxlConfGroup();
+        ConfGroup xxlConfGroup = new ConfGroup();
 
         // valid
         if (xxlConfGroup.getGroupName() == null || StringUtils.isBlank(xxlConfGroup.getGroupName())) {
@@ -52,11 +60,11 @@ public class GroupController extends SMBaseController {
         }
 
         // valid repeat
-        XxlConfGroup groupOld = xxlConfGroupDao.load(xxlConfGroup.getGroupName());
+        ConfGroup groupOld = GuiceDI.getInstance(ConfGroupDao.class).load(xxlConfGroup.getGroupName());
         if (groupOld != null) {
             json = JsonMsgResult.buildResult(500, "GroupName对应分组以存在,请勿重复添加");
         }
-        int ret = xxlConfGroupDao.save(xxlConfGroup);
+        int ret = GuiceDI.getInstance(ConfGroupDao.class).save(xxlConfGroup);
         json = JsonMsgResult.buildResult(500, "success", "", "", "");
         return new JsonActionResult(json.toJSONString());
     }
@@ -64,7 +72,7 @@ public class GroupController extends SMBaseController {
     @Path("/update")
     public ActionResult update() {
         JSONObject json = new JSONObject();
-        XxlConfGroup xxlConfGroup = new XxlConfGroup();
+        ConfGroup xxlConfGroup = new ConfGroup();
         // valid
         if (xxlConfGroup.getGroupName() == null || StringUtils.isBlank(xxlConfGroup.getGroupName())) {
             json = JsonMsgResult.buildResult(500, "请输入GroupName");
@@ -76,7 +84,7 @@ public class GroupController extends SMBaseController {
         if (xxlConfGroup.getGroupTitle() == null || StringUtils.isBlank(xxlConfGroup.getGroupTitle())) {
             json = JsonMsgResult.buildResult(500, "请输入分组名称");
         }
-        int ret = xxlConfGroupDao.update(xxlConfGroup);
+        int ret = GuiceDI.getInstance(ConfGroupDao.class).update(xxlConfGroup);
         json = JsonMsgResult.buildResult(500, "success", "", "", "");
         return new JsonActionResult(json.toJSONString());
     }
@@ -88,17 +96,17 @@ public class GroupController extends SMBaseController {
         String groupName = ParamUtil.getString(beat.getRequest(), "groupName", "");
 
         // valid
-        int list_count = xxlConfNodeDao.pageListCount(0, 10, groupName, null);
+        int list_count = GuiceDI.getInstance(ConfNodeDao.class).pageListCount(0, 10, groupName, null);
         if (list_count > 0) {
             json = JsonMsgResult.buildResult(500, "该分组使用中, 不可删除");
         }
 
-        List<XxlConfGroup> allList = xxlConfGroupDao.findAll();
+        List<ConfGroup> allList = GuiceDI.getInstance(ConfGroupDao.class).findAll();
         if (allList.size() == 1) {
             json = JsonMsgResult.buildResult(500, "删除失败, 系统需要至少预留一个默认分组");
         }
 
-        int ret = xxlConfGroupDao.remove(groupName);
+        int ret = GuiceDI.getInstance(ConfGroupDao.class).remove(groupName);
         json = JsonMsgResult.buildResult(500, "success", "", "", "");
         return new JsonActionResult(json.toJSONString());
     }

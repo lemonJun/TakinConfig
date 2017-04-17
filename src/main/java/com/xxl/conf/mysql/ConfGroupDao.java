@@ -12,16 +12,18 @@ import com.xxl.conf.util.GuiceDI;
 /**
  * Created by xuxueli on 16/10/8.
  */
-public class XxlConfGroupDaoImpl {
+public class ConfGroupDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(XxlConfGroupDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConfGroupDao.class);
 
-    public List<XxlConfGroup> findAll() {
+    public List<ConfGroup> findAll() {
         try {
-            StopWatch watch = new StopWatch();
-            watch.start();
             String sql = "select * from XXL_CONF_GROUP ";
-            List<XxlConfGroup> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(XxlConfGroup.class, sql);
+            List<ConfGroup> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfGroup.class, sql);
+            for (ConfGroup group : list) {
+                logger.info("group:" + group.getGroupName() + " titel:" + group.getGroupTitle());
+            }
+
             return list;
         } catch (Exception e) {
             logger.error("", e);
@@ -30,7 +32,7 @@ public class XxlConfGroupDaoImpl {
         //        return sqlSessionTemplate.selectList("XxlConfGroupMapper.findAll");
     }
 
-    public int save(XxlConfGroup xxlJobGroup) {
+    public int save(ConfGroup xxlJobGroup) {
         int id = 0;
         try {
             Object obj = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.insert(xxlJobGroup);
@@ -43,7 +45,7 @@ public class XxlConfGroupDaoImpl {
         return id;
     }
 
-    public int update(XxlConfGroup xxlJobGroup) {
+    public int update(ConfGroup xxlJobGroup) {
         int id = 0;
         try {
             GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.upateEntity(xxlJobGroup);
@@ -65,13 +67,13 @@ public class XxlConfGroupDaoImpl {
         return 1;
     }
 
-    public XxlConfGroup load(String groupName) {
+    public ConfGroup load(String groupName) {
         try {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "select * from XXL_CONF_GROUP where group_name ='" + groupName + "'";
-            List<XxlConfGroup> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(XxlConfGroup.class, sql);
-            XxlConfGroup bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
+            List<ConfGroup> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfGroup.class, sql);
+            ConfGroup bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
             return bean;
         } catch (Exception e) {
             logger.error("", e);

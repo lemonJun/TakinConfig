@@ -1,16 +1,10 @@
 package com.xxl.conf.mysql;
 
 import com.bj58.sfft.utility.dao.annotation.Table;
-import com.bj58.spat.scf.serializer.component.annotation.SCFSerializable;
-import com.xxl.conf.core.XxlConfZkClient;
+import com.xxl.conf.core.ConfZkClient;
 
-/**
- * 配置节点
- * @author xuxueli 2015-9-4 15:26:01
- */
 @Table(name = "XXL_CONF_NODE")
-@SCFSerializable
-public class XxlConfNode {
+public class ConfNode {
 
     private String nodeGroup; // group of prop
     private String nodeKey; // key of prop
@@ -53,7 +47,7 @@ public class XxlConfNode {
     }
 
     public String getGroupKey() {
-        return XxlConfZkClient.generateGroupKey(nodeGroup, nodeKey);
+        return ConfZkClient.generateGroupKey(nodeGroup, nodeKey);
     }
 
     public String getNodeValueReal() {

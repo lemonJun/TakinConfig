@@ -14,8 +14,8 @@ import java.util.Properties;
  * local cache
  * @author xuxueli 2015-8-28 15:35:20
  */
-public class XxlConfClient {
-    private static Logger logger = LoggerFactory.getLogger(XxlConfClient.class);
+public class ConfClient {
+    private static Logger logger = LoggerFactory.getLogger(ConfClient.class);
     public static Properties localProp = PropertiesUtil.loadProperties("local.properties");
     private static Cache cache;
     static {
@@ -50,7 +50,7 @@ public class XxlConfClient {
                 return (String) element.getObjectValue();
             }
         }
-        String zkData = XxlConfZkClient.getPathDataByKey(key);
+        String zkData = ConfZkClient.getPathDataByKey(key);
         if (zkData != null) {
             set(key, zkData);
             return zkData;

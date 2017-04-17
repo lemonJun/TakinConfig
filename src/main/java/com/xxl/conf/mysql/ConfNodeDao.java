@@ -13,16 +13,16 @@ import com.xxl.conf.util.GuiceDI;
  * 配置
  * @author xuxueli
  */
-public class XxlConfNodeDaoImpl {
+public class ConfNodeDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(XxlConfNodeDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConfNodeDao.class);
 
-    public List<XxlConfNode> pageList(int offset, int pagesize, String nodeGroup, String nodeKey) {
+    public List<ConfNode> pageList(int offset, int pagesize, String nodeGroup, String nodeKey) {
         try {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "select * from XXL_CONF_NODE ";
-            List<XxlConfNode> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(XxlConfNode.class, sql);
+            List<ConfNode> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfNode.class, sql);
             return list;
         } catch (Exception e) {
             logger.error("", e);
@@ -46,7 +46,7 @@ public class XxlConfNodeDaoImpl {
         return 1;
     }
 
-    public void insert(XxlConfNode node) {
+    public void insert(ConfNode node) {
         try {
             Object obj = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.insert(node);
         } catch (Exception e) {
@@ -54,13 +54,13 @@ public class XxlConfNodeDaoImpl {
         }
     }
 
-    public XxlConfNode selectByKey(String nodeGroup, String nodeKey) {
+    public ConfNode selectByKey(String nodeGroup, String nodeKey) {
         try {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "select * from XXL_CONF_NODE where node_group ='" + nodeGroup + "' and node_key='" + nodeKey + "'";
-            List<XxlConfNode> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(XxlConfNode.class, sql);
-            XxlConfNode bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
+            List<ConfNode> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfNode.class, sql);
+            ConfNode bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
             return bean;
         } catch (Exception e) {
             logger.error("", e);
@@ -68,7 +68,7 @@ public class XxlConfNodeDaoImpl {
         return null;
     }
 
-    public int update(XxlConfNode node) {
+    public int update(ConfNode node) {
         int id = 0;
         try {
             GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.upateEntity(node);

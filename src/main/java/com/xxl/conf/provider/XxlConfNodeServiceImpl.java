@@ -7,11 +7,11 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.xxl.conf.core.XxlConfZkClient;
-import com.xxl.conf.mysql.XxlConfGroup;
-import com.xxl.conf.mysql.XxlConfGroupDaoImpl;
-import com.xxl.conf.mysql.XxlConfNode;
-import com.xxl.conf.mysql.XxlConfNodeDaoImpl;
+import com.xxl.conf.core.ConfZkClient;
+import com.xxl.conf.mysql.ConfGroup;
+import com.xxl.conf.mysql.ConfGroupDao;
+import com.xxl.conf.mysql.ConfNode;
+import com.xxl.conf.mysql.ConfNodeDao;
 import com.xxl.conf.util.GuiceDI;
 import com.xxl.conf.util.ReturnT;
 
@@ -21,19 +21,19 @@ import com.xxl.conf.util.ReturnT;
  */
 public class XxlConfNodeServiceImpl {
 
-    private XxlConfNodeDaoImpl xxlConfNodeDao = GuiceDI.getInstance(XxlConfNodeDaoImpl.class);
-    private XxlConfGroupDaoImpl xxlConfGroupDao = GuiceDI.getInstance(XxlConfGroupDaoImpl.class);
+    private ConfNodeDao xxlConfNodeDao = GuiceDI.getInstance(ConfNodeDao.class);
+    private ConfGroupDao xxlConfGroupDao = GuiceDI.getInstance(ConfGroupDao.class);
 
     public Map<String, Object> pageList(int offset, int pagesize, String nodeGroup, String nodeKey) {
 
         // xxlConfNode in mysql
-        List<XxlConfNode> data = xxlConfNodeDao.pageList(offset, pagesize, nodeGroup, nodeKey);
+        List<ConfNode> data = xxlConfNodeDao.pageList(offset, pagesize, nodeGroup, nodeKey);
         int list_count = xxlConfNodeDao.pageListCount(offset, pagesize, nodeGroup, nodeKey);
 
         // fill value in zk
         if (CollectionUtils.isNotEmpty(data)) {
-            for (XxlConfNode node : data) {
-                String realNodeValue = XxlConfZkClient.getPathDataByKey(node.getGroupKey());
+            for (ConfNode node : data) {
+                String realNodeValue = ConfZkClient.getPathDataByKey(node.getGroupKey());
                 node.setNodeValueReal(realNodeValue);
             }
         }
@@ -54,39 +54,39 @@ public class XxlConfNodeServiceImpl {
 
         xxlConfNodeDao.deleteByKey(nodeGroup, nodeKey);
 
-        String groupKey = XxlConfZkClient.generateGroupKey(nodeGroup, nodeKey);
-        XxlConfZkClient.deletePathByKey(groupKey);
+        String groupKey = ConfZkClient.generateGroupKey(nodeGroup, nodeKey);
+        ConfZkClient.deletePathByKey(groupKey);
 
         return ReturnT.SUCCESS;
     }
 
-    public ReturnT<String> add(XxlConfNode xxlConfNode) {
+    public ReturnT<String> add(ConfNode xxlConfNode) {
         if (xxlConfNode == null) {
             return new ReturnT<String>(500, "参数缺失");
         }
         if (StringUtils.isBlank(xxlConfNode.getNodeGroup())) {
             return new ReturnT<String>(500, "配置分组不可为空");
         }
-        XxlConfGroup group = xxlConfGroupDao.load(xxlConfNode.getNodeGroup());
+        ConfGroup group = xxlConfGroupDao.load(xxlConfNode.getNodeGroup());
         if (group == null) {
             return new ReturnT<String>(500, "配置分组不存在");
         }
         if (StringUtils.isBlank(xxlConfNode.getNodeKey())) {
             return new ReturnT<String>(500, "配置Key不可为空");
         }
-        XxlConfNode existNode = xxlConfNodeDao.selectByKey(xxlConfNode.getNodeGroup(), xxlConfNode.getNodeKey());
+        ConfNode existNode = xxlConfNodeDao.selectByKey(xxlConfNode.getNodeGroup(), xxlConfNode.getNodeKey());
         if (existNode != null) {
             return new ReturnT<String>(500, "Key对应的配置已经存在,不可重复添加");
         }
         xxlConfNodeDao.insert(xxlConfNode);
 
-        String groupKey = XxlConfZkClient.generateGroupKey(xxlConfNode.getNodeGroup(), xxlConfNode.getNodeKey());
-        XxlConfZkClient.setPathDataByKey(groupKey, xxlConfNode.getNodeValue());
+        String groupKey = ConfZkClient.generateGroupKey(xxlConfNode.getNodeGroup(), xxlConfNode.getNodeKey());
+        ConfZkClient.setPathDataByKey(groupKey, xxlConfNode.getNodeValue());
 
         return ReturnT.SUCCESS;
     }
 
-    public ReturnT<String> update(XxlConfNode xxlConfNode) {
+    public ReturnT<String> update(ConfNode xxlConfNode) {
         if (xxlConfNode == null || StringUtils.isBlank(xxlConfNode.getNodeKey())) {
             return new ReturnT<String>(500, "Key不可为空");
         }
@@ -95,8 +95,8 @@ public class XxlConfNodeServiceImpl {
             return new ReturnT<String>(500, "Key对应的配置不存在,请确认");
         }
 
-        String groupKey = XxlConfZkClient.generateGroupKey(xxlConfNode.getNodeGroup(), xxlConfNode.getNodeKey());
-        XxlConfZkClient.setPathDataByKey(groupKey, xxlConfNode.getNodeValue());
+        String groupKey = ConfZkClient.generateGroupKey(xxlConfNode.getNodeGroup(), xxlConfNode.getNodeKey());
+        ConfZkClient.setPathDataByKey(groupKey, xxlConfNode.getNodeValue());
 
         return ReturnT.SUCCESS;
     }

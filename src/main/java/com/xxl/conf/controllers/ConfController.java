@@ -2,7 +2,7 @@ package com.xxl.conf.controllers;
 
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
-import com.xxl.conf.mysql.XxlConfGroupDaoImpl;
+import com.xxl.conf.mysql.ConfGroupDao;
 import com.xxl.conf.provider.XxlConfNodeServiceImpl;
 import com.xxl.conf.util.GuiceDI;
 
@@ -14,7 +14,7 @@ import com.xxl.conf.util.GuiceDI;
 @Controller
 public class ConfController extends SMBaseController {
 
-    private XxlConfGroupDaoImpl xxlConfGroupDao = GuiceDI.getInstance(XxlConfGroupDaoImpl.class);
+    private ConfGroupDao xxlConfGroupDao = GuiceDI.getInstance(ConfGroupDao.class);
     private XxlConfNodeServiceImpl xxlConfNodeService = GuiceDI.getInstance(XxlConfNodeServiceImpl.class);
 
 }

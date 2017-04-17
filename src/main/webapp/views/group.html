@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Cache-Control" content="no-transform">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   	<title>任务调度中心</title>
-  	<#import "/common/common.macro.ftl" as netCommon>
 	<!-- DataTables -->
-  	<link rel="stylesheet" href="resources/adminlte/plugins/datatables/dataTables.bootstrap.css">
+  	<link rel="stylesheet" href="/adminlte/plugins/datatables/dataTables.bootstrap.css">
   	<!-- daterangepicker -->
-  	<link rel="stylesheet" href="resources/adminlte/plugins/daterangepicker/daterangepicker-bs3.css">
+  	<link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker-bs3.css">
 </head>
-<body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && "off" == cookieMap["adminlte_settings"].value >sidebar-collapse</#if> ">
+<body class="hold-transition skin-blue sidebar-mini < ">
+#parse("/views/common.html")
 <div class="wrapper">
 	<!-- header -->
 	<!-- left -->
@@ -40,18 +45,16 @@
 					                </tr>
 				                </thead>
                                 <tbody>
-								<#if list?exists && list?size gt 0>
-								<#list list as group>
+									#foreach($!item in $!list)								
 									<tr>
-                                        <td>${group.groupName}</td>
-                                        <td>${group.groupTitle}</td>
+                                        <td>$!item.groupName</td>
+                                        <td>$!item.groupTitle</td>
 										<td>
-                                            <button class="btn btn-warning btn-xs update" groupName="${group.groupName}" groupTitle="${group.groupTitle}" >编辑</button>
-                                            <button class="btn btn-danger btn-xs remove" groupName="${group.groupName}" >删除</button>
+                                            <button class="btn btn-warning btn-xs update" groupName="$!item.groupName" groupTitle="$!item.groupTitle" >编辑</button>
+                                            <button class="btn btn-danger btn-xs remove" groupName="$!item.groupTitle" >删除</button>
 										</td>
 									</tr>
-								</#list>
-								</#if>
+									#end
 								</tbody>
 							</table>
 						</div>
@@ -121,13 +124,12 @@
         </div>
     </div>
 	
-	<!-- footer -->
 </div>
 
 <!-- DataTables -->
-<script src="resources/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="resources/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="resources/plugins/jquery/jquery.validate.min.js"></script>
-<script src="resources/js/group.index.1.js"></script>
+<script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="/plugins/jquery/jquery.validate.min.js"></script>
+<script src="/js/group.index.1.js"></script>
 </body>
 </html>
