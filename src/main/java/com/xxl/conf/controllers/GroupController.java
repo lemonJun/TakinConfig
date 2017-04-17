@@ -27,11 +27,9 @@ public class GroupController extends SMBaseController {
 
     @Path("/index")
     public ActionResult index() {
-
         List<XxlConfGroup> list = xxlConfGroupDao.findAll();
-
         beat.getModel().add("list", list);
-        return ActionResult.view("group/group.inde");
+        return ActionResult.view("group");
     }
 
     @Path("/save")
