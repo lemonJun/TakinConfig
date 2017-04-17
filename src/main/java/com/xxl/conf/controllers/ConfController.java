@@ -17,15 +17,21 @@ import com.xxl.conf.util.GuiceDI;
  * 配置管理
  * @author xuxueli
  */
-@Path("/conf")
+@Path("/")
 @Controller
 public class ConfController extends SMBaseController {
 
-    @Path("")
+    @Path("conf.html")
     public ActionResult index() {
-        List<ConfGroup> list = GuiceDI.getInstance(ConfGroupDao.class).findAll();
-        beat.getModel().add("XxlConfNodeGroup", list);
-        return ActionResult.view("views/conf");
+        List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(0, 0, "", "");
+        beat.getModel().add("list", list);
+
+        List<ConfGroup> glist = GuiceDI.getInstance(ConfGroupDao.class).findAll();
+        beat.getModel().add("glist", glist);
+
+        beat.getModel().add("nodeKey", "");
+
+        return ActionResult.view("conf");
     }
 
     @Path("/pageList")

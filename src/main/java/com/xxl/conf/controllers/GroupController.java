@@ -17,16 +17,17 @@ import com.xxl.conf.mysql.ConfNodeDao;
 import com.xxl.conf.util.GuiceDI;
 
 /**
+ * 
  * conf group controller
  * @author xuxueli 2016-10-02 20:52:56
  */
-@Path("/group")
+@Path("/")
 @Controller
 public class GroupController extends SMBaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 
-    @Path("")
+    @Path("group.html")
     public ActionResult index() {
         try {
             List<ConfGroup> list = GuiceDI.getInstance(ConfGroupDao.class).findAll();
@@ -37,7 +38,7 @@ public class GroupController extends SMBaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ActionResult.view("views/group");
+        return ActionResult.view("group");
     }
 
     @Path("/save")

@@ -21,10 +21,6 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>配置管理 <small></small></h1>
-				<#--<ol class="breadcrumb">
-					<li><a><i class="fa fa-dashboard"></i>配置中心</a></li>
-					<li class="active">配置管理</li>
-				</ol>-->
 			</section>
 
 			<!-- Main content -->
@@ -36,16 +32,16 @@
                             <span class="input-group-addon">分组</span>
                             <select class="form-control" id="nodeGroup" >
                                 <option value="" >全部</option>
-								<#list XxlConfNodeGroup as group>
-									<option value="${group.groupName}" >${group.groupTitle}</option>
-								</#list>
+								#foreach($!item in $!glist)	
+									<option value="$!item.groupName" >$!item.groupTitle</option>
+								#end
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-4">
                         <div class="input-group">
                             <span class="input-group-addon">KEY</span>
-                            <input type="text" class="form-control" id="nodeKey" value="${nodeKey}" autocomplete="on" >
+                            <input type="text" class="form-control" id="nodeKey" value="$!nodeKey" autocomplete="on" >
                         </div>
                     </div>
                     <div class="col-xs-2">
@@ -72,22 +68,20 @@
 		                      	</tr>
 							</thead>
 		                    <tbody>
-		                    	<#if fileterData?exists>
-		                    		<#list fileterData as item>
+		                    		#foreach($!item in $!list)	
 		                    			<tr>
-					                        <td>${item.nodeKey}</td>
-					                        <td <#if item.znodeValue != item.znodeValueReal>style="color:red;font: italic bold"</#if> >${item.znodeValue}</td>
-					                        <td <#if item.znodeValue != item.znodeValueReal>style="color:red;font: italic bold"</#if> >${item.znodeValueReal}</td>
-					                        <td>${item.znodeDesc}</td>
+					                        <td>$!item.nodeKey</td>
+					                        <td >$!item.znodeValue</td>
+					                        <td >$!item.znodeValueReal</td>
+					                        <td>$!item.nodeDesc</td>
 					                        <td>
 					                        	<div class="input-group">
-						                      		<button class="btn btn-primary btn-xs update" type="button" nodeKey="${item.nodeKey}" znodeValue="${item.znodeValue}" znodeDesc="${item.znodeDesc}" >更新</button>&nbsp;
-						                      		<button class="btn btn-danger btn-xs delete" type="button" nodeKey="${item.nodeKey}">删除</button>
+						                      		<button class="btn btn-primary btn-xs update" type="button" nodeKey="$!item.nodeKey" znodeValue="$!item.znodeValue" znodeDesc="$!item.znodeDesc" >更新</button>&nbsp;
+						                      		<button class="btn btn-danger btn-xs delete" type="button" nodeKey="$!item.nodeKey">删除</button>
 					                        	</div>
 					                        </td>
 				                      	</tr>
-		                    		</#list>
-		                    	</#if>
+		                    		#end
 		                    </tbody>
 	                  	</table>
 					</div><!-- /.box-body -->
@@ -189,7 +183,7 @@
     <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script src="/plugins/jquery/jquery.validate.min.js"></script>
-    <script src="/js/conf.1.js"></script>
+    <script src="/custom/conf.1.js"></script>
 	
 </body>
 </html>

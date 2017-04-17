@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>后台管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="/components/font-awesome/css/font-awesome.min.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="/assets/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+		<!-- <link rel="stylesheet" href="assets/css/ace-skins.css" />
+		<link rel="stylesheet" href="assets/css/ace-rtl.css" /> -->
+
+		<!-- 自定义样式 -->
+		<link rel="stylesheet" href="/css/main.css" />
+		<style type="text/css">
+		.echart_jobChr{ width: 100%; height: 300px; margin-top: 30px;}
+		</style>
+
+	</head>
+
+	<body class="mainBg">
+		<div class="jobChrBox">
+			<div class="table_jobChr"></div>
+			<div class="line"></div>
+			<div class="echart_jobChr" id="echart_jobChr"></div>
+		</div>
+
+		<script src="/components/jquery/dist/jquery.min.js"></script>
+		<!-- echarts -->
+		<script src="/js/echarts.min.js"></script>
+
+		<script src="/components/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="/components/_mod/datatables/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="/components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+		<script src="/components/datatables.net-buttons/js/buttons.flash.min.js"></script>
+		<script src="/components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+		<script src="/components/datatables.net-buttons/js/buttons.print.min.js"></script>
+		<script src="/components/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+		<script src="/components/datatables.net-select/js/dataTables.select.min.js"></script>
+		
+		<!-- 自定义js -->
+		<script src="/js/table.js"></script>
+		<script type="text/javascript">
+		tableWrapFn({"parents" : ".table_jobChr","titleHead" : "英才发布职位"});
+		initList(1);
+		//初始化
+		function initList(currentPage){
+			var param = {
+				"page":currentPage,
+		        "select":$("#table-select select").val() || "",
+		        "ser":$("#dynamic-table_filter input").val() || ""
+		    };
+			$.ajax({
+				url: "/data/tmplist",  //请求后端地址
+				dataType: "json",
+				param: param,
+				success: function(data){
+					if(data.code == 0){
+						tableDomFn(data);
+					    page({curPage : data.pageDetail.page,
+				    		  nextPage : data.pageDetail.next,
+				    		  callBackFn : function (e){
+				    		  	initList(e.current);
+				    		  	$(document).scrollTop(0);
+				    		  }
+				    		});
+					}else{
+						alert('网络错误，请稍后再试！');
+					}
+				},
+				error: function (){
+					alert('网络错误，请稍后再试！');
+				}
+			})
+		}
+
+		$('#btn-table').off().on('click', function (){
+			initList(1);
+	    })
+		</script>
+		
+	</body>
+</html>

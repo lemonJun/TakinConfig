@@ -15,7 +15,7 @@ import com.takin.mvc.mvc.annotation.Path;
 @Controller
 public class ConsoleController extends SMBaseController {
 
-    @Path("/index")
+    @Path("/index.html")
     public ActionResult index() {
         return ActionResult.view("index");
     }
@@ -23,7 +23,12 @@ public class ConsoleController extends SMBaseController {
     @Path("/admin")
     public ActionResult main() {
         System.out.println("goto baido");
-        return ActionResult.view("views/main");
+        return ActionResult.view("main");
+    }
+
+    @Path("/tmpmgr")
+    public ActionResult tmpmgr() {
+        return ActionResult.view("tmpmgr");
     }
 
 }

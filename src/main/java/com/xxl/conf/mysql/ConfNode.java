@@ -1,5 +1,6 @@
 package com.xxl.conf.mysql;
 
+import com.bj58.sfft.utility.dao.annotation.NotDBColumn;
 import com.bj58.sfft.utility.dao.annotation.Table;
 import com.xxl.conf.core.ConfZkClient;
 
@@ -11,8 +12,10 @@ public class ConfNode {
     private String nodeValue; // value of prop
     private String nodeDesc; // description of prop
 
-    private String groupKey; // key of prop [in zk]
-    private String nodeValueReal; // value of prop [in zk]
+    @NotDBColumn
+    private String groupKey = ""; // key of prop [in zk]
+    @NotDBColumn
+    private String nodeValueReal = ""; // value of prop [in zk]
 
     public String getNodeGroup() {
         return nodeGroup;

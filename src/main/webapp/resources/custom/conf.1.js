@@ -6,7 +6,7 @@ $(function(){
 		"processing" : true,
 		"serverSide": true,
 		"ajax": {
-			url: base_url + "/conf/pageList",
+			url:  "/conf/pageList",
 			type:"post",
 			data : function ( d ) {
 				var obj = {};
@@ -102,7 +102,7 @@ $(function(){
 		var nodeKey = $(this).parent('p').attr("nodeKey");
 		ComConfirm.show("确定要删除配置：" + nodeKey, function(){
 			$.post(
-				base_url + "/conf/delete",
+				  "/conf/delete",
 				{
 					"nodeGroup" : nodeGroup,
 					"nodeKey" : nodeKey
@@ -169,7 +169,7 @@ $(function(){
             element.parent('div').append(error);  
         },
         submitHandler : function(form) {
-    		$.post(base_url + "/conf/add", $("#addModal .form").serialize(), function(data, status) {
+    		$.post("/conf/add", $("#addModal .form").serialize(), function(data, status) {
     			if (data.code == "200") {
     				ComAlert.show(1, "新增配置成功", function(){
 						confTable.fnDraw();
@@ -234,7 +234,7 @@ $(function(){
             element.parent('div').append(error);  
         },
         submitHandler : function(form) {
-    		$.post(base_url + "/conf/update", $("#updateModal .form").serialize(), function(data, status) {
+    		$.post(  "/conf/update", $("#updateModal .form").serialize(), function(data, status) {
     			if (data.code == "200") {
     				ComAlert.show(1, "更新配置成功", function(){
 						confTable.fnDraw();
