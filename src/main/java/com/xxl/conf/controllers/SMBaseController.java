@@ -1,29 +1,18 @@
 package com.xxl.conf.controllers;
 
-import java.io.File;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bj58.spat.scf.client.SCFInit;
 import com.takin.mvc.mvc.AbstractController;
 import com.takin.mvc.mvc.Model;
-import com.takin.mvc.mvc.WF;
 import com.xxl.conf.util.GuiceDI;
 
 public class SMBaseController extends AbstractController {
     private static final Logger logger = Logger.getLogger(SMBaseController.class);
 
     static {
-        String path = WF.getConfigFolder() + WF.getNamespace();
-        try {
-            SCFInit.init(path + File.separator + "scf.config");
-            System.out.println("===========bizconfigurebuilder===========" + path + File.separator + "business.xml");
-        } catch (Exception e) {
-            logger.error("BaseController.static.init");
-        }
         try {
             GuiceDI.init();
         } catch (Exception e) {

@@ -23,11 +23,11 @@ public class ConfController extends SMBaseController {
 
     @Path("conf.html")
     public ActionResult index() {
-        List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(0, 0, "", "");
-        beat.getModel().add("list", list);
+        //        List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(0, 0, "", "");
+        beat.getModel().add("list", null);
 
-        List<ConfGroup> glist = GuiceDI.getInstance(ConfGroupDao.class).findAll();
-        beat.getModel().add("glist", glist);
+        //        List<ConfGroup> glist = GuiceDI.getInstance(ConfGroupDao.class).findAll();
+        beat.getModel().add("glist", null);
 
         beat.getModel().add("nodeKey", "");
 

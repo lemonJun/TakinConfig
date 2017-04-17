@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
@@ -30,7 +31,7 @@ public class GroupController extends SMBaseController {
     @Path("group.html")
     public ActionResult index() {
         try {
-            List<ConfGroup> list = GuiceDI.getInstance(ConfGroupDao.class).findAll();
+            List<ConfGroup> list = Lists.newArrayList();//GuiceDI.getInstance(ConfGroupDao.class).findAll();
             beat.getModel().add("list", list);
             for (ConfGroup group : list) {
                 logger.info("group:" + group.getGroupname() + " titel:" + group.getGrouptitle());

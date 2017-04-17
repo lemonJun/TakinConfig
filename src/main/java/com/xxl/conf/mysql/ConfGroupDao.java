@@ -6,8 +6,8 @@ import org.apache.commons.lang.time.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lemonjun.mysql.orm.BDProvider;
 import com.xxl.conf.util.CollectionUtil;
-import com.xxl.conf.util.GuiceDI;
 
 /**
  * Created by xuxueli on 16/10/8.
@@ -19,11 +19,10 @@ public class ConfGroupDao {
     public List<ConfGroup> findAll() {
         try {
             String sql = "select * from XXL_CONF_GROUP ";
-            List<ConfGroup> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfGroup.class, sql);
+            List<ConfGroup> list = BDProvider.getInst().Client().getListByPreSQL(ConfGroup.class, sql, 5000, null);
             for (ConfGroup group : list) {
                 logger.info("group:" + group.getGroupname() + " titel:" + group.getGrouptitle());
             }
-
             return list;
         } catch (Exception e) {
             logger.error("", e);
@@ -35,7 +34,7 @@ public class ConfGroupDao {
     public int save(ConfGroup xxlJobGroup) {
         int id = 0;
         try {
-            Object obj = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.insert(xxlJobGroup);
+            Object obj = BDProvider.getInst().Client().insert(xxlJobGroup);
             if (obj != null) {
                 id = (int) ((long) obj);
             }
@@ -48,7 +47,7 @@ public class ConfGroupDao {
     public int update(ConfGroup xxlJobGroup) {
         int id = 0;
         try {
-            GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.upateEntity(xxlJobGroup);
+            BDProvider.getInst().Client().upateEntity(xxlJobGroup);
         } catch (Exception e) {
             logger.error("", e);
         }
@@ -60,7 +59,7 @@ public class ConfGroupDao {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "delete from XXL_CONF_GROUP where group_name ='" + groupName + "'";
-            GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.execBySQL(sql);
+            BDProvider.getInst().Client().deleteByWhere(ConfGroup.class, "group_name ='" + groupName + "'", 5000);
         } catch (Exception e) {
             logger.error("", e);
         }
@@ -72,7 +71,7 @@ public class ConfGroupDao {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "select * from XXL_CONF_GROUP where group_name ='" + groupName + "'";
-            List<ConfGroup> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfGroup.class, sql);
+            List<ConfGroup> list = BDProvider.getInst().Client().getListByWhere(ConfGroup.class, "*", "group_name ='" + groupName + "'", "", "", 5000);
             ConfGroup bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
             return bean;
         } catch (Exception e) {

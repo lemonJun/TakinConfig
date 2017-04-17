@@ -1,7 +1,7 @@
 package com.xxl.conf.mysql;
 
-import com.bj58.sfft.utility.dao.annotation.NotDBColumn;
-import com.bj58.sfft.utility.dao.annotation.Table;
+import com.lemonjun.mysql.orm.annotation.NotDBColumn;
+import com.lemonjun.mysql.orm.annotation.Table;
 import com.xxl.conf.core.ConfZkClient;
 
 @Table(name = "XXL_CONF_NODE")

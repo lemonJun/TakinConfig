@@ -1,6 +1,6 @@
 package com.xxl.conf.mysql;
 
-import com.bj58.sfft.utility.dao.annotation.Table;
+import com.lemonjun.mysql.orm.annotation.Table;
 
 @Table(name = "XXL_CONF_GROUP")
 public class ConfGroup {
