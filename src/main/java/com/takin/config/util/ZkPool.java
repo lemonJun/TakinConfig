@@ -4,27 +4,32 @@ import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.log4j.Logger;
+
+import com.takin.config.core.ZKConfig;
+import com.takin.mvc.mvc.inject.GuiceDI;
 
 public class ZkPool {
+
+    private static final Logger logger = Logger.getLogger(ZkPool.class);
 
     public static final RetryPolicy policy = new ExponentialBackoffRetry(100, 2);
     public static CuratorFramework client = null;
 
-    public static String connectings = "192.168.119.10:2181,192.168.119.10:2182,192.168.119.10:2183";
-
     /**
-     * 初始化zk客户�?  涉及到多线程
+     * 初始化zk客户 涉及到多线程
      * @return
      */
     public static CuratorFramework getClient() {
         try {
             if (client == null) {
-                client = CuratorFrameworkFactory.builder().connectString(connectings).sessionTimeoutMs(1000).retryPolicy(policy).build();
+                logger.info(GuiceDI.getInstance(ZKConfig.class));
+                client = CuratorFrameworkFactory.builder().connectString("localhost:2181").sessionTimeoutMs(1000).retryPolicy(policy).build();
                 client.start();
                 Thread.sleep(2000);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
         return client;
     }

@@ -16,6 +16,7 @@ import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
 
 @Controller
+@Path("")
 public class ZKController extends BaseController {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -22,6 +22,11 @@
 			<artifactId>guice</artifactId>
 			<version>3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.takin</groupId>
+			<artifactId>emmet</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>

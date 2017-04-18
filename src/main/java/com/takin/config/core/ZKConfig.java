@@ -1,9 +1,15 @@
 package com.takin.config.core;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
 public class ZKConfig {
+
+    @Inject
+    public ZKConfig() {
+        
+    }
 
     private String zkhosts;
 

@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
+import com.alibaba.fastjson.JSON;
 import com.takin.config.core.ZKConfig;
 import com.takin.config.util.GuiceDI;
 import com.takin.emmet.file.PropertiesHelper;
@@ -22,8 +23,10 @@ public class BaseController extends AbstractController {
 
         try {
             ZKConfig config = GuiceDI.getInstance(ZKConfig.class);
-            PropertiesHelper pro = new PropertiesHelper(WF.getNamespaceConfigFolder() + File.separator + "");
+            PropertiesHelper pro = new PropertiesHelper(WF.getNamespaceConfigFolder() + File.separator + "zoo.properties");
+
             config.setZkhosts(pro.getString("zkhosts"));
+            logger.info("hosts:" + JSON.toJSONString(config));
         } catch (Exception e) {
             e.printStackTrace();
         }
