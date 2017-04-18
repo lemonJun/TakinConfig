@@ -44,6 +44,8 @@ $(function(){
 				"render": function ( data, type, row ) {
 					return function(){
 						// html
+						alert(data);
+						alert(row);
 						var html = '<p id="'+ row.id +'" '+
 							' nodeGroup="'+ row.nodeGroup +'" '+
 							' nodeKey="'+ row.nodeKey +'" '+

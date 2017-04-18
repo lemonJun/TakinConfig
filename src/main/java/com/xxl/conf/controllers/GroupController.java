@@ -21,13 +21,13 @@ import com.xxl.conf.util.GuiceDI;
  * conf group controller
  * @author xuxueli 2016-10-02 20:52:56
  */
-@Path("/")
+@Path("")
 @Controller
 public class GroupController extends SMBaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 
-    @Path("group.html")
+    @Path("/group.html")
     public ActionResult index() {
         try {
             List<ConfGroup> list = GuiceDI.getInstance(ConfGroupDao.class).findAll();

@@ -17,7 +17,7 @@ public class ConfGroupDao {
 
     public List<ConfGroup> findAll() {
         try {
-            List<ConfGroup> list = BDProvider.getInst().Client().getListByWhere(ConfGroup.class, "*", "", "", "");
+            List<ConfGroup> list = BDProvider.getInst().Client().getListByWhere(ConfGroup.class, "", "", "", "");
             for (ConfGroup group : list) {
                 logger.info("group:" + group.getGroupname() + " titel:" + group.getGrouptitle());
             }

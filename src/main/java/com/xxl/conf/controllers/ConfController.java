@@ -17,52 +17,60 @@ import com.xxl.conf.util.GuiceDI;
  * 配置管理
  * @author xuxueli
  */
-@Path("/")
+@Path("")
 @Controller
 public class ConfController extends SMBaseController {
 
-    @Path("conf.html")
+    @Path("/conf.html")
     public ActionResult index() {
-        List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(0, 0, "", "");
-        beat.getModel().add("list", list);
+        try {
+            List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(1, 10, "", "");
+            beat.getModel().add("list", list);
 
-        List<ConfGroup> glist = GuiceDI.getInstance(ConfGroupDao.class).findAll();
-        beat.getModel().add("glist", glist);
+            List<ConfGroup> glist = GuiceDI.getInstance(ConfGroupDao.class).findAll();
+            beat.getModel().add("glist", glist);
 
-        beat.getModel().add("nodeKey", "");
+            beat.getModel().add("nodeKey", "");
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ActionResult.view("conf");
     }
 
-    @Path("/pageList")
+    @Path("/conf/pageList")
     public ActionResult pageList() {
         JSONObject json = new JSONObject();
-        String nodeGroup = ParamUtil.getString(beat.getRequest(), "nodeGroup", "");
-        String nodeKey = ParamUtil.getString(beat.getRequest(), "nodeKey", "");
-        int start = ParamUtil.getInt(beat.getRequest(), "start", 1);
-        int length = ParamUtil.getInt(beat.getRequest(), "length", 10);
+        try {
+            String nodeGroup = ParamUtil.getString(beat.getRequest(), "nodeGroup", "");
+            String nodeKey = ParamUtil.getString(beat.getRequest(), "nodeKey", "");
+            int start = ParamUtil.getInt(beat.getRequest(), "start", 1);
+            int length = ParamUtil.getInt(beat.getRequest(), "length", 10);
 
-        GuiceDI.getInstance(ConfNodeDao.class).deleteByKey(nodeGroup, nodeKey);
+            GuiceDI.getInstance(ConfNodeDao.class).deleteByKey(nodeGroup, nodeKey);
 
-        List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(start, length, nodeGroup, nodeKey);
-        beat.getModel().add("list", list);
+            List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(start+1, length, nodeGroup, nodeKey);
+            beat.getModel().add("list", list);
 
-        json = JsonMsgResult.buildResult(500, "success", "", "", "");
+            json = JsonMsgResult.buildResult(500, "success", "", "", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new JsonActionResult(json.toJSONString());
     }
 
-    /**
-     * get
-     * @return
-     */
     @Path("/delete")
     public ActionResult delete() {
         JSONObject json = new JSONObject();
-        String nodeGroup = ParamUtil.getString(beat.getRequest(), "nodeGroup", "");
-        String nodeKey = ParamUtil.getString(beat.getRequest(), "nodeKey", "");
+        try {
+            String nodeGroup = ParamUtil.getString(beat.getRequest(), "nodeGroup", "");
+            String nodeKey = ParamUtil.getString(beat.getRequest(), "nodeKey", "");
 
-        GuiceDI.getInstance(ConfNodeDao.class).deleteByKey(nodeGroup, nodeKey);
-        json = JsonMsgResult.buildResult(500, "success", "", "", "");
+            GuiceDI.getInstance(ConfNodeDao.class).deleteByKey(nodeGroup, nodeKey);
+            json = JsonMsgResult.buildResult(500, "success", "", "", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new JsonActionResult(json.toJSONString());
     }
 
@@ -73,9 +81,13 @@ public class ConfController extends SMBaseController {
     @Path("/add")
     public ActionResult add() {
         JSONObject json = new JSONObject();
-        ConfNode confNode = new ConfNode();
-        GuiceDI.getInstance(ConfNodeDao.class).insert(confNode);
-        json = JsonMsgResult.buildResult(500, "success", "", "", "");
+        try {
+            ConfNode confNode = new ConfNode();
+            GuiceDI.getInstance(ConfNodeDao.class).insert(confNode);
+            json = JsonMsgResult.buildResult(500, "success", "", "", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new JsonActionResult(json.toJSONString());
     }
 
@@ -86,9 +98,13 @@ public class ConfController extends SMBaseController {
     @Path("/update")
     public ActionResult update() {
         JSONObject json = new JSONObject();
-        ConfNode confNode = new ConfNode();
-        GuiceDI.getInstance(ConfNodeDao.class).update(confNode);
-        json = JsonMsgResult.buildResult(500, "success", "", "", "");
+        try {
+            ConfNode confNode = new ConfNode();
+            GuiceDI.getInstance(ConfNodeDao.class).update(confNode);
+            json = JsonMsgResult.buildResult(500, "success", "", "", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new JsonActionResult(json.toJSONString());
     }
 

@@ -33,7 +33,7 @@
                             <select class="form-control" id="nodeGroup" >
                                 <option value="" >全部</option>
 								#foreach($!item in $!glist)	
-									<option value="$!item.groupName" >$!item.groupTitle</option>
+									<option value="$!item.groupname" >$!item.grouptitle</option>
 								#end
                             </select>
                         </div>
@@ -71,7 +71,7 @@
 		                    		#foreach($!item in $!list)	
 		                    			<tr>
 					                        <td>$!item.nodeKey</td>
-					                        <td >$!item.znodeValue</td>
+					                        <td >$!item.nodeValue</td>
 					                        <td >$!item.znodeValueReal</td>
 					                        <td>$!item.nodeDesc</td>
 					                        <td>

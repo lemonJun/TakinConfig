@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.BeatContext;
-import com.takin.mvc.mvc.annotation.Controller;
 
 /**
 * 按照帮帮接入要求返回JSON格式数据

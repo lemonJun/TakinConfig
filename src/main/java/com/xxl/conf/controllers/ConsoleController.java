@@ -31,4 +31,24 @@ public class ConsoleController extends SMBaseController {
         return ActionResult.view("tmpmgr");
     }
 
+    @Path("/znode.html")
+    public ActionResult znode() {
+        return view("znode");
+    }
+
+    @Path("/fcmd")
+    public ActionResult fourCmd() {
+        return view("fcmd");
+    }
+
+    @Path("/cluster.html")
+    public ActionResult cluster() {
+        return view("cluster");
+    }
+
+    @Path("/auth.html")
+    public ActionResult auth() {
+        return view("auth");
+    }
+
 }

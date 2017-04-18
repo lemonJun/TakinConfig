@@ -6,6 +6,8 @@ import org.apache.commons.lang.time.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.takin.emmet.collection.CollectionUtil;
+
 /**
  * 配置
  * @author xuxueli
@@ -16,9 +18,6 @@ public class ConfNodeDao {
 
     public List<ConfNode> pageList(int offset, int pagesize, String nodeGroup, String nodeKey) {
         try {
-            StopWatch watch = new StopWatch();
-            watch.start();
-            String sql = "select * from XXL_CONF_NODE ";
             List<ConfNode> list = BDProvider.getInst().Client().pageListByWhere(ConfNode.class, "", "", offset, pagesize, "");
             return list;
         } catch (Exception e) {
@@ -35,8 +34,7 @@ public class ConfNodeDao {
         try {
             StopWatch watch = new StopWatch();
             watch.start();
-            String sql = "delete from XXL_CONF_NODE where node_group ='" + nodeGroup + "' and node_key='" + nodeKey + "'";
-            //            GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.execBySQL(sql);
+            BDProvider.getInst().Client().deleteByWhere(ConfNode.class, "node_group ='" + nodeGroup + "' and node_key='" + nodeKey + "'");
         } catch (Exception e) {
             logger.error("", e);
         }
@@ -45,7 +43,7 @@ public class ConfNodeDao {
 
     public void insert(ConfNode node) {
         try {
-            //            Object obj = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.insert(node);
+            BDProvider.getInst().Client().insert(node);
         } catch (Exception e) {
             logger.error("", e);
         }
@@ -55,10 +53,9 @@ public class ConfNodeDao {
         try {
             StopWatch watch = new StopWatch();
             watch.start();
-            String sql = "select * from XXL_CONF_NODE where node_group ='" + nodeGroup + "' and node_key='" + nodeKey + "'";
-            //            List<ConfNode> list = GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.getListBySQL(ConfNode.class, sql);
-            //            ConfNode bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
-            return null;
+            List<ConfNode> list = BDProvider.getInst().Client().getListByWhere(ConfNode.class, "*", "", "", "");
+            ConfNode bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
+            return bean;
         } catch (Exception e) {
             logger.error("", e);
         }
@@ -68,7 +65,7 @@ public class ConfNodeDao {
     public int update(ConfNode node) {
         int id = 0;
         try {
-            //            GuiceDI.getInstance(DBHelper.class).getDAOHelper().sql.upateEntity(node);
+            BDProvider.getInst().Client().upateEntity(node);
         } catch (Exception e) {
             logger.error("", e);
         }
