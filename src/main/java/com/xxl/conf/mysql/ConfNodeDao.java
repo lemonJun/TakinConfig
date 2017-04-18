@@ -6,10 +6,6 @@ import org.apache.commons.lang.time.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lemonjun.mysql.orm.BDProvider;
-import com.xxl.conf.util.CollectionUtil;
-import com.xxl.conf.util.GuiceDI;
-
 /**
  * 配置
  * @author xuxueli
@@ -23,7 +19,7 @@ public class ConfNodeDao {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "select * from XXL_CONF_NODE ";
-            List<ConfNode> list = BDProvider.getInst().Client().pageListByWhere(ConfNode.class, "", "", offset, pagesize, "", 5000);
+            List<ConfNode> list = BDProvider.getInst().Client().pageListByWhere(ConfNode.class, "", "", offset, pagesize, "");
             return list;
         } catch (Exception e) {
             logger.error("", e);

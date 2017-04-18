@@ -6,7 +6,6 @@ import org.apache.commons.lang.time.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lemonjun.mysql.orm.BDProvider;
 import com.xxl.conf.util.CollectionUtil;
 
 /**
@@ -18,8 +17,7 @@ public class ConfGroupDao {
 
     public List<ConfGroup> findAll() {
         try {
-            String sql = "select * from XXL_CONF_GROUP ";
-            List<ConfGroup> list = BDProvider.getInst().Client().getListByPreSQL(ConfGroup.class, sql, 5000, null);
+            List<ConfGroup> list = BDProvider.getInst().Client().getListByWhere(ConfGroup.class, "*", "", "", "");
             for (ConfGroup group : list) {
                 logger.info("group:" + group.getGroupname() + " titel:" + group.getGrouptitle());
             }
@@ -59,7 +57,7 @@ public class ConfGroupDao {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "delete from XXL_CONF_GROUP where group_name ='" + groupName + "'";
-            BDProvider.getInst().Client().deleteByWhere(ConfGroup.class, "group_name ='" + groupName + "'", 5000);
+            BDProvider.getInst().Client().deleteByWhere(ConfGroup.class, "group_name ='" + groupName + "'");
         } catch (Exception e) {
             logger.error("", e);
         }
@@ -71,7 +69,7 @@ public class ConfGroupDao {
             StopWatch watch = new StopWatch();
             watch.start();
             String sql = "select * from XXL_CONF_GROUP where group_name ='" + groupName + "'";
-            List<ConfGroup> list = BDProvider.getInst().Client().getListByWhere(ConfGroup.class, "*", "group_name ='" + groupName + "'", "", "", 5000);
+            List<ConfGroup> list = BDProvider.getInst().Client().getListByWhere(ConfGroup.class, "*", "group_name ='" + groupName + "'", "", "");
             ConfGroup bean = CollectionUtil.isNotEmpty(list) ? list.get(0) : null;
             return bean;
         } catch (Exception e) {
