@@ -7,7 +7,7 @@ import com.google.inject.Singleton;
 public class ZKConfig {
 
     @Inject
-    public ZKConfig() {
+    private ZKConfig() {
         
     }
 

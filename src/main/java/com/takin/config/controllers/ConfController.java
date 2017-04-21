@@ -8,6 +8,7 @@ import com.takin.config.mysql.ConfGroupDao;
 import com.takin.config.mysql.ConfNode;
 import com.takin.config.mysql.ConfNodeDao;
 import com.takin.config.util.GuiceDI;
+import com.takin.mvc.mvc.AbstractController;
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
@@ -19,7 +20,7 @@ import com.takin.mvc.util.ParamUtil;
  */
 @Path("")
 @Controller
-public class ConfController extends BaseController {
+public class ConfController extends AbstractController {
 
     @Path("/conf.html")
     public ActionResult index() {
@@ -49,7 +50,7 @@ public class ConfController extends BaseController {
 
             GuiceDI.getInstance(ConfNodeDao.class).deleteByKey(nodeGroup, nodeKey);
 
-            List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(start+1, length, nodeGroup, nodeKey);
+            List<ConfNode> list = GuiceDI.getInstance(ConfNodeDao.class).pageList(start + 1, length, nodeGroup, nodeKey);
             beat.getModel().add("list", list);
 
             json = JsonMsgResult.buildResult(500, "success", "", "", "");

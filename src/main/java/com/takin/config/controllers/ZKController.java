@@ -4,20 +4,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.data.Stat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.zkclient.ZkClient;
 import com.takin.config.util.ZkPool;
+import com.takin.mvc.mvc.AbstractController;
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.BeatContext;
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
+import com.takin.rpc.registry.ZkUtils;
 
 @Controller
 @Path("")
-public class ZKController extends BaseController {
+public class ZKController extends AbstractController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ZKController.class);
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -27,9 +33,10 @@ public class ZKController extends BaseController {
         BeatContext beat = beat();
         String path = beat.getRequest().getParameter("path");
         try {
-            CuratorFramework client = ZkPool.getClient();
+            ZkClient client = ZkPool.getClient();
             Stat stat = new Stat();
-            byte[] bs = client.getData().storingStatIn(stat).forPath(path);
+            String bs = ZkUtils.readDataMaybeNull(client, path);
+            //            byte[] bs = client.getData().storingStatIn(stat).forPath(path);
             JSONObject obj = new JSONObject();
             obj.put("id", 1);
             obj.put("pid", 0);
@@ -37,7 +44,7 @@ public class ZKController extends BaseController {
             obj.put("hasClick", false);
             obj.put("isParent", false);
 
-            json.put("data", bs == null || bs.length < 1 ? "NA" : new String(bs));
+            json.put("data", bs);
             json.put("obj", obj);
             json.put("stat", toStat(stat));
             json.put("succ", 1);
@@ -56,8 +63,8 @@ public class ZKController extends BaseController {
         String ppath = beat.getRequest().getParameter("ppath");
         String pid = beat.getRequest().getParameter("pid");
         try {
-            CuratorFramework client = ZkPool.getClient();
-            List<String> children = client.getChildren().forPath(ppath);
+            ZkClient client = ZkPool.getClient();
+            List<String> children = ZkUtils.getChildrenParentMayNotExist(client, ppath);
             JSONArray array = new JSONArray();
             for (int i = 1; i < children.size(); i++) {
                 String str = children.get(i);
@@ -77,10 +84,10 @@ public class ZKController extends BaseController {
             }
 
             Stat stat = new Stat();
-            byte[] bs = client.getData().storingStatIn(stat).forPath(ppath);
-
+            String bs = ZkUtils.readData(client, ppath);
+            logger.info(array.toJSONString());
             json.put("childs", array.toArray());
-            json.put("data", bs == null || bs.length < 1 ? "NA" : new String(bs));
+            json.put("data", bs);
             json.put("stat", toStat(stat));
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,65 +109,65 @@ public class ZKController extends BaseController {
         return sb.toString();
     }
 
-    @Path("/modifyNodeData")
-    public ActionResult modifyNodeData() {
-        JSONObject json = new JSONObject();
-        BeatContext beat = beat();
-        String path = beat.getRequest().getParameter("path");
-        String id = beat.getRequest().getParameter("id");
-        String value = beat.getRequest().getParameter("value");
-        if ("1".equals(id)) {
-            path = "/";
-        }
-        if (value == null || value.length() < 1) {
-            return null;
-        }
-
-        try {
-            CuratorFramework client = ZkPool.getClient();
-            client.setData().forPath(path, value.getBytes());
-
-            Stat stat = new Stat();
-            byte[] bs = client.getData().storingStatIn(stat).forPath(path);
-
-            json.put("data", bs == null ? "NA" : new String(bs));
-            json.put("issuccess", true);
-            json.put("stat", stat.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            json.put("issuccess", false);
-        }
-        return new JsonActionResult(json.toString());
-    }
-
-    @Path("/telnet")
-    public ActionResult telnetFourCMD() {
-        JSONObject json = new JSONObject();
-        BeatContext beat = beat();
-        String path = beat.getRequest().getParameter("path");
-        String id = beat.getRequest().getParameter("id");
-        String value = beat.getRequest().getParameter("value");
-        if ("1".equals(id)) {
-            path = "/";
-        }
-        if (value == null || value.length() < 1) {
-            return null;
-        }
-
-        try {
-            CuratorFramework client = ZkPool.getClient();
-            client.setData().forPath(path, value.getBytes());
-
-            Stat stat = new Stat();
-            byte[] bs = client.getData().storingStatIn(stat).forPath(path);
-
-            json.put("data", bs == null ? "NA" : new String(bs));
-            json.put("issuccess", true);
-            json.put("stat", stat.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            json.put("issuccess", false);
-        }
-        return new JsonActionResult(json.toString());
-    }
+    //    @Path("/modifyNodeData")
+    //    public ActionResult modifyNodeData() {
+    //        JSONObject json = new JSONObject();
+    //        BeatContext beat = beat();
+    //        String path = beat.getRequest().getParameter("path");
+    //        String id = beat.getRequest().getParameter("id");
+    //        String value = beat.getRequest().getParameter("value");
+    //        if ("1".equals(id)) {
+    //            path = "/";
+    //        }
+    //        if (value == null || value.length() < 1) {
+    //            return null;
+    //        }
+    //
+    //        try {
+    //            CuratorFramework client = ZkPool.getClient();
+    //            client.setData().forPath(path, value.getBytes());
+    //
+    //            Stat stat = new Stat();
+    //            byte[] bs = client.getData().storingStatIn(stat).forPath(path);
+    //
+    //            json.put("data", bs == null ? "NA" : new String(bs));
+    //            json.put("issuccess", true);
+    //            json.put("stat", stat.toString());
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //            json.put("issuccess", false);
+    //        }
+    //        return new JsonActionResult(json.toString());
+    //    }
+    //
+    //    @Path("/telnet")
+    //    public ActionResult telnetFourCMD() {
+    //        JSONObject json = new JSONObject();
+    //        BeatContext beat = beat();
+    //        String path = beat.getRequest().getParameter("path");
+    //        String id = beat.getRequest().getParameter("id");
+    //        String value = beat.getRequest().getParameter("value");
+    //        if ("1".equals(id)) {
+    //            path = "/";
+    //        }
+    //        if (value == null || value.length() < 1) {
+    //            return null;
+    //        }
+    //
+    //        try {
+    //            CuratorFramework client = ZkPool.getClient();
+    //            client.setData().forPath(path, value.getBytes());
+    //
+    //            Stat stat = new Stat();
+    //            byte[] bs = client.getData().storingStatIn(stat).forPath(path);
+    //
+    //            json.put("data", bs == null ? "NA" : new String(bs));
+    //            json.put("issuccess", true);
+    //            json.put("stat", stat.toString());
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //            json.put("issuccess", false);
+    //        }
+    //        return new JsonActionResult(json.toString());
+    //    }
 }

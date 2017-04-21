@@ -11,6 +11,7 @@ import com.takin.config.mysql.ConfGroup;
 import com.takin.config.mysql.ConfGroupDao;
 import com.takin.config.mysql.ConfNodeDao;
 import com.takin.config.util.GuiceDI;
+import com.takin.mvc.mvc.AbstractController;
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
@@ -23,7 +24,7 @@ import com.takin.mvc.util.ParamUtil;
  */
 @Path("")
 @Controller
-public class GroupController extends BaseController {
+public class GroupController extends AbstractController {
 
     private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 

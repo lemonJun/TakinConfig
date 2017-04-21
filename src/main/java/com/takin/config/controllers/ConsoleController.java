@@ -1,5 +1,6 @@
 package com.takin.config.controllers;
 
+import com.takin.mvc.mvc.AbstractController;
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
@@ -13,7 +14,7 @@ import com.takin.mvc.mvc.annotation.Path;
  */
 @Path("")
 @Controller
-public class ConsoleController extends BaseController {
+public class ConsoleController extends AbstractController {
 
     @Path("/index.html")
     public ActionResult index() {

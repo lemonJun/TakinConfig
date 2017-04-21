@@ -8,13 +8,14 @@ import com.alibaba.fastjson.JSON;
 import com.takin.config.core.ZKConfig;
 import com.takin.config.util.GuiceDI;
 import com.takin.emmet.file.PropertiesHelper;
-import com.takin.mvc.mvc.AbstractController;
+import com.takin.mvc.mvc.IInit;
 import com.takin.mvc.mvc.WF;
 
-public class BaseController extends AbstractController {
-    private static final Logger logger = Logger.getLogger(BaseController.class);
+public class ConfigInit implements IInit {
+    private static final Logger logger = Logger.getLogger(ConfigInit.class);
 
-    static {
+    @Override
+    public void init() {
         try {
             GuiceDI.init();
         } catch (Exception e) {
