@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSON;
 import com.github.zkclient.ZkClient;
 import com.takin.config.core.ZKConfig;
-import com.takin.mvc.mvc.inject.GuiceDI;
 
 public class ZkPool {
 

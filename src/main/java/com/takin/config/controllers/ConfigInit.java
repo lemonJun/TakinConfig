@@ -10,7 +10,9 @@ import com.takin.config.util.GuiceDI;
 import com.takin.emmet.file.PropertiesHelper;
 import com.takin.mvc.mvc.IInit;
 import com.takin.mvc.mvc.WF;
+import com.takin.mvc.mvc.annotation.Init;
 
+@Init
 public class ConfigInit implements IInit {
     private static final Logger logger = Logger.getLogger(ConfigInit.class);
 

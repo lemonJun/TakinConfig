@@ -64,9 +64,10 @@ public class ZKController extends AbstractController {
         String pid = beat.getRequest().getParameter("pid");
         try {
             ZkClient client = ZkPool.getClient();
+            logger.info("ppath:" + ppath);
             List<String> children = ZkUtils.getChildrenParentMayNotExist(client, ppath);
             JSONArray array = new JSONArray();
-            for (int i = 1; i < children.size(); i++) {
+            for (int i = 0; i < children.size(); i++) {
                 String str = children.get(i);
                 JSONObject obj = new JSONObject();
                 obj.put("id", pid + "" + i);
