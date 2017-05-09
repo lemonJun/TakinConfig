@@ -45,7 +45,7 @@ public class ConfGroupDao {
     public int update(ConfGroup xxlJobGroup) {
         int id = 0;
         try {
-            BDProvider.getInst().Client().upateEntity(xxlJobGroup);
+            BDProvider.getInst().Client().upate(xxlJobGroup);
         } catch (Exception e) {
             logger.error("", e);
         }

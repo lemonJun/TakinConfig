@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.github.zkclient.ZkClient;
 import com.takin.config.util.ZkPool;
 import com.takin.mvc.mvc.AbstractController;
 import com.takin.mvc.mvc.ActionResult;
 import com.takin.mvc.mvc.BeatContext;
 import com.takin.mvc.mvc.annotation.Controller;
 import com.takin.mvc.mvc.annotation.Path;
-import com.takin.rpc.registry.ZkUtils;
+import com.takin.rpc.zkclient.ZkClient;
+import com.takin.rpc.zkclient.ZkUtils;
 
 @Controller
 @Path("")

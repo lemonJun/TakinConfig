@@ -65,7 +65,7 @@ public class ConfNodeDao {
     public int update(ConfNode node) {
         int id = 0;
         try {
-            BDProvider.getInst().Client().upateEntity(node);
+            BDProvider.getInst().Client().upate(node);
         } catch (Exception e) {
             logger.error("", e);
         }
